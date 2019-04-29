@@ -42,7 +42,8 @@
 </template>
 
 <script>
-  import axios from 'axios';
+  import axios from 'axios'
+  import swal from 'sweetalert'
   export default {
     data() {
       return {
@@ -63,7 +64,7 @@
           this.form.title = response.data.title
           this.form.description = response.data.description
 
-          alert("Libro actualizado exitosamente!")
+          swal("Libro actualizado exitosamente!", "", "success")
         })
         .catch((error) => {
           console.log(error)
