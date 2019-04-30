@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
+
+import NewBook from '@/components/Book/NewBook'
 import ListBook from '@/components/Book/ListBook'
 import EditBook from '@/components/Book/EditBook'
 
@@ -17,6 +19,11 @@ export default new Router({
       path: '/books',
       name: 'ListBook',
       component: ListBook
+    },
+    {
+      path: '/books/new',
+      name: 'NewBook',
+      component: NewBook
     },
     {
       path: '/books/:bookId/edit',
