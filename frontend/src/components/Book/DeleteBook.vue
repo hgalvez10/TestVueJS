@@ -30,7 +30,7 @@
     },
     methods: {
       getBook() {
-        const path = `http://localhost:8000/api/v1.0/books/${this.bookId}/`
+        const path = `${process.env.BASE_URI}books/${this.bookId}/`
 
         axios.get(path).then((response) => {
 

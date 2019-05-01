@@ -40,7 +40,7 @@
     },
     methods: {
       getBooks () {
-        const path = 'http://localhost:8000/api/v1.0/books/'
+        const path = `${process.env.BASE_URI}books/`
         axios.get(path).then((response) => {
           this.books = response.data
         })
@@ -49,19 +49,28 @@
         })
       },
       deleteBook(bookId) {
-        const path = 'http://localhost:8000/api/v1.0/books/'+bookId+'/'
+        const path = `${process.env.BASE_URI}books/`+bookId+'/'
         swal({
           title: "Estas seguro?",
           text: "Una vez eliminado, no podrá recuperar este registro!",
           icon: "warning",
-          buttons: true,
-          dangerMode: true,
+          buttons: {
+            cancel: "No, cancelar",
+            confirm: {
+              text: "Sí, quiero",
+              value: true,
+            },
+          },
+          closeOnClickOutside: false,
+          closeOnEsc: false,
         })
         .then((willDelete) => {
           if (willDelete) {
             axios.delete(path).then((response) => {
               swal("Poof! Su registro ha sido borrado!", {
                 icon: "success",
+                buttons: false,
+                timer: 3000,
               }).then(function() {
                   location.href = '/books'
               });
@@ -70,7 +79,10 @@
               swal("No es posible eliminar el libro", "", "error")
             })
           } else {
-            swal("Su registro está a salvo!");
+            swal({
+              text: "Su registro está a salvo!",
+              icon: "info",
+            });
           }
         });
       }
@@ -81,4 +93,6 @@
   }
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+
+</style>

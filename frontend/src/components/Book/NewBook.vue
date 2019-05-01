@@ -56,7 +56,7 @@
     methods: {
       onSubmit(evt) {
         evt.preventDefault()
-        const path = 'http://localhost:8000/api/v1.0/books/'
+        const path = `${process.env.BASE_URI}books/`
 
         axios.post(path, this.form).then((response) => {
 
@@ -67,6 +67,7 @@
               title: "Wow!",
               text: "Libro creado exitosamente!",
               icon: "success",
+              timer: 3000,
           }).then(function() {
               location.href = '/books'
           });
