@@ -57,14 +57,21 @@
     methods: {
       onSubmit(evt) {
         evt.preventDefault()
-        const path = `http://localhost:8000/api/v1.0/books/${this.bookId}/`
+        const path = `${process.env.BASE_URI}books/${this.bookId}/`
 
         axios.put(path, this.form).then((response) => {
 
           this.form.title = response.data.title
           this.form.description = response.data.description
 
-          swal("Libro actualizado exitosamente!", "", "success")
+          swal({
+              title: "Wow!",
+              text: "Libro actualizado exitosamente!",
+              icon: "success",
+              timer: 3000,
+          }).then(function() {
+              location.href = '/books'
+          });
         })
         .catch((error) => {
           console.log(error)
